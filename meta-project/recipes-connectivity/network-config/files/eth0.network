@@ -1,0 +1,8 @@
+[Match]
+MACAddress=b8:27:eb:fb:19:b6
+
+[Network]
+Address=192.168.1.100/24
+Gateway=192.168.1.1
+DNS=8.8.8.8
+LinkLocalAddressing=no

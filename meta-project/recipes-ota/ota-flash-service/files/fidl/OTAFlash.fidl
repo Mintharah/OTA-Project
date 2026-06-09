@@ -1,0 +1,89 @@
+package com.ota                          // Namespace
+
+// The Service Interface
+interface OTAFlashService {
+
+    version { major 1 minor 0 }
+
+    // Shared Data Types
+    enumeration OTAErrorCode {
+        SUCCESS              // everything went fine
+        INVALID_TRANSFER_ID  // session ID not recognised by server
+        CHUNK_OUT_OF_ORDER   // chunk index doesn't match what server expected
+        CHECKSUM_MISMATCH    // SHA256 computed by Yocto didn't match QNX's value
+        FLASH_WRITE_ERROR    // dd / write to partition failed
+        PARTITION_BUSY       // partition is currently the active boot slot
+        STORAGE_FULL         // not enough space in temp staging area
+        TRANSFER_TIMEOUT     // chunks stopped arriving mid-transfer
+        TRANSFER_IN_PROGRESS 
+        INVALID_PARAMETER
+        INCOMPLETE_TRANSFER
+    }
+
+    // Reported by the FlashProgress event so QNX can show progress.
+    enumeration FlashState {
+        IDLE
+        RECEIVING    // still getting chunks
+        VERIFYING    // checksum check in progress
+        FLASHING     // writing to rootfs_b
+        REBOOTING    // setting U-Boot flag, about to reboot
+        COMPLETE     // done, new partition is armed
+        FAILED       // something went wrong (see errorCode)
+    }
+
+    // Attributes (server-owned state that clients can read/subscribe to)
+    attribute FlashState    currentState        readonly noSubscriptions
+    attribute UInt8         flashProgressPercent readonly noSubscriptions
+
+    // Methods (request / response calls)
+    method startTransfer {
+        in {
+            UInt64  imageSize
+            UInt32  totalChunks
+            String  expectedChecksum
+        }
+        out {
+            String       transferId
+            OTAErrorCode errorCode
+        }
+    }
+
+    method sendChunk {
+        in {
+            String     transferId
+            UInt32     chunkIndex
+            ByteBuffer chunkData     // ByteBuffer = vector<uint8>
+        }
+        out {
+            OTAErrorCode errorCode
+        }
+    }
+
+    method finalizeTransfer {
+        in {
+            String transferId
+        }
+        out {
+            OTAErrorCode errorCode
+        }
+    }
+
+    method cancelTransfer {
+        in {
+            String transferId
+        }
+        out {
+            OTAErrorCode errorCode
+        }
+    }
+
+    // Broadcasts
+    broadcast FlashProgress {
+        out {
+            String       transferId
+            FlashState   flashState
+            UInt8        progressPercent   // 0-100
+            OTAErrorCode errorCode
+        }
+    }
+}

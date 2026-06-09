@@ -1,0 +1,16 @@
+[Unit]
+Description=OTA Client UI
+After=ota-flash.service
+Requires=ota-flash.service
+
+[Service]
+Environment="VSOMEIP_APPLICATION_NAME=OTAClientUI"
+Environment="VSOMEIP_CONFIGURATION=/etc/vsomeip-client.json"
+Environment="COMMONAPI_DEFAULT_BINDING=someip"
+Environment="COMMONAPI_CONFIG=/etc/commonapi.ini"
+ExecStart=/usr/bin/ota-client-ui -platform linuxfb
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

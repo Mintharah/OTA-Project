@@ -1,0 +1,115 @@
+import "platform:/plugin/org.genivi.commonapi.someip/deployment/CommonAPI-SOMEIP_deployment_spec.fdepl"
+import "OTAFlash.fidl"
+
+define org.genivi.commonapi.someip.deployment for interface com.ota.OTAFlashService {
+
+    // Service-level IDs
+
+    SomeIpServiceID    = 0x0100
+    SomeIpInstanceID   = 0x0001
+    SomeIpMajorVersion = 1
+    SomeIpMinorVersion = 0
+
+    attribute currentState {
+        SomeIpAttributeReliable = true
+        SomeIpGetterID  = 0x0010
+    }
+
+    attribute flashProgressPercent {
+        SomeIpAttributeReliable = true
+        SomeIpGetterID  = 0x0012
+    }
+
+    // Method IDs
+
+    method startTransfer {
+        SomeIpMethodID = 0x0001
+
+        in {
+            imageSize        { }           // UInt64 - fixed 8 bytes, no extra config
+            totalChunks      { }           // UInt32 - fixed 4 bytes
+            expectedChecksum {
+                SomeIpStringEncoding = utf8
+                SomeIpStringLengthWidth = 4
+            }
+        }
+        out {
+            transferId {
+                SomeIpStringEncoding = utf8
+                SomeIpStringLengthWidth = 4
+            }
+            errorCode { }
+        }
+    }
+
+    method sendChunk {
+        SomeIpMethodID = 0x0002
+        SomeIpReliable = true
+
+        in {
+            transferId {
+                SomeIpStringEncoding = utf8
+                SomeIpStringLengthWidth = 4
+            }
+            chunkIndex { }                 // UInt32
+            chunkData {
+                SomeIpByteBufferMinLength = 0
+                SomeIpByteBufferMaxLength = 65536   // 64 KB max per chunk
+            }
+        }
+        out {
+            errorCode { }
+        }
+    }
+
+    method finalizeTransfer {
+        SomeIpMethodID = 0x0003
+
+        in {
+            transferId {
+                SomeIpStringEncoding = utf8
+                SomeIpStringLengthWidth = 4
+            }
+        }
+        out {
+            errorCode { }
+        }
+    }
+
+    method cancelTransfer {
+        SomeIpMethodID = 0x0005
+
+        in {
+            transferId {
+                SomeIpStringEncoding = utf8
+                SomeIpStringLengthWidth = 4
+            }
+        }
+        out {
+            errorCode { }
+        }
+    }
+
+    // Broadcast (Event) IDs
+    broadcast FlashProgress {
+        SomeIpEventID = 0x8001
+        SomeIpEventGroups = { 0x0001 }
+
+        out {
+            transferId {
+                SomeIpStringEncoding = utf8
+                SomeIpStringLengthWidth = 4
+            }
+            flashState     { }
+            progressPercent { }
+            errorCode { }
+        }
+    }
+}
+
+define org.genivi.commonapi.someip.deployment for provider as Service {
+    instance com.ota.OTAFlashService {
+        InstanceId = "com.ota.OTAFlashService"   // string name used at runtime
+        SomeIpInstanceID = 0x0001
+    }
+}

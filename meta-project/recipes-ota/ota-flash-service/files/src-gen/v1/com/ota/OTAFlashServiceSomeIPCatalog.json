@@ -1,0 +1,8 @@
+{
+    "com.ota.OTAFlashService" : {
+        "service_id": 256,
+        "instances" : {
+            "com.ota.OTAFlashService": 1
+        }
+    }
+}

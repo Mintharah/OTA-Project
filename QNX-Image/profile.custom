@@ -1,0 +1,45 @@
+# local/snippets/profile.custom
+# Contents are included at the end of /etc/profile
+export PATH=/usr/lib/libweston-14:/usr/local/bin:/usr/bin:__IFS_PATH__
+export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/usr/lib/dll:__IFS_PATH__
+
+export ALSA_CONFIG_PATH=/usr/etc/alsa/alsa.conf
+export FONTCONFIG_PATH=/etc/fonts
+export MM_INIT=/usr/lib/dll/mmedia
+export OMXIL_COMPONENT_PATH=/usr/lib/dll/omxil
+export TERM=xterm-256color
+# TODO: review TERMINFO in more detail and readjust as required
+#export TERMINFO=/usr/etc/terminfo
+export TERMINFO=/usr/share/terminfo
+export TZDIR=/usr/share/zoneinfo
+
+# export VIMRUNTIME=/usr/share/vim/vim91
+alias nvim='VIMRUNTIME=/usr/share/nvim/runtime nvim'
+alias vim='VIMRUNTIME=/usr/share/vim/vim91 vim'
+
+if [ -f /etc/motd ]; then
+    cat /etc/motd
+fi
+
+if [ -n "$BASH_VERSION" ]; then
+  export PS1="\\u@\\h:\\w\\\\$ "
+else
+  export PS1="$(whoami)@console":'${PWD\}# '
+fi
+
+# Load profiles from /etc/profile.d
+if test -d /etc/profile.d/; then
+    for profile in /etc/profile.d/*.sh; do
+            test -r "$profile" && . "$profile"
+    done
+    unset profile
+fi
+
+# Source global bash config, when interactive but not posix or sh mode
+if test "$BASH" && test "$PS1" && test -z "$POSIXLY_CORRECT" && test -r /etc/bash.bashrc; then
+    . /etc/bash.bashrc
+fi
+
+export LD_LIBRARY_PATH=/data/usr/local/lib:$LD_LIBRARY_PATH
+
+

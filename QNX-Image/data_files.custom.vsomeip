@@ -1,0 +1,37 @@
+# vsomeip libraries
+[uid=0 gid=0 perms=0755] usr/local/lib/libvsomeip3.so.3=${QNX_TARGET}/x86_64/usr/local/lib/libvsomeip3.so.3
+[uid=0 gid=0 perms=0755] usr/local/lib/libvsomeip3-cfg.so.3=${QNX_TARGET}/x86_64/usr/local/lib/libvsomeip3-cfg.so.3
+[uid=0 gid=0 perms=0755] usr/local/lib/libvsomeip3-sd.so.3=${QNX_TARGET}/x86_64/usr/local/lib/libvsomeip3-sd.so.3
+[uid=0 gid=0 perms=0755] usr/local/lib/libvsomeip3-e2e.so.3=${QNX_TARGET}/x86_64/usr/local/lib/libvsomeip3-e2e.so.3
+
+# boost libraries
+[uid=0 gid=0 perms=0755] usr/local/lib/libboost_system.so.1.78.0=${QNX_TARGET}/x86_64/usr/local/lib/libboost_system.so.1.78.0
+[uid=0 gid=0 perms=0755] usr/local/lib/libboost_thread.so.1.78.0=${QNX_TARGET}/x86_64/usr/local/lib/libboost_thread.so.1.78.0
+[uid=0 gid=0 perms=0755] usr/local/lib/libboost_filesystem.so.1.78.0=${QNX_TARGET}/x86_64/usr/local/lib/libboost_filesystem.so.1.78.0
+[uid=0 gid=0 perms=0755] usr/local/lib/libboost_log.so.1.78.0=${QNX_TARGET}/x86_64/usr/local/lib/libboost_log.so.1.78.0
+[uid=0 gid=0 perms=0755] usr/local/lib/libboost_atomic.so.1.78.0=${QNX_TARGET}/x86_64/usr/local/lib/libboost_atomic.so.1.78.0
+[uid=0 gid=0 perms=0755] usr/local/lib/libboost_log_setup.so.1.78.0=${QNX_TARGET}/x86_64/usr/local/lib/libboost_log_setup.so.1.78.0
+[uid=0 gid=0 perms=0755] usr/local/lib/libboost_chrono.so.1.78.0=${QNX_TARGET}/x86_64/usr/local/lib/libboost_chrono.so.1.78.0
+[uid=0 gid=0 perms=0755] usr/local/lib/libboost_date_time.so.1.78.0=${QNX_TARGET}/x86_64/usr/local/lib/libboost_date_time.so.1.78.0
+[uid=0 gid=0 perms=0755] usr/local/lib/libboost_regex.so.1.78.0=${QNX_TARGET}/x86_64/usr/local/lib/libboost_regex.so.1.78.0
+
+# CommonAPI libraries
+[uid=0 gid=0 perms=0755] usr/local/lib/libCommonAPI.so=${QNX_TARGET}/x86_64/usr/local/lib/libCommonAPI.so
+[uid=0 gid=0 perms=0755] usr/local/lib/libCommonAPI.so.3=${QNX_TARGET}/x86_64/usr/local/lib/libCommonAPI.so
+[uid=0 gid=0 perms=0755] usr/local/lib/libCommonAPI.so.3.2.4=${QNX_TARGET}/x86_64/usr/local/lib/libCommonAPI.so
+
+[uid=0 gid=0 perms=0755] usr/local/lib/libCommonAPI-SomeIP.so=${QNX_TARGET}/x86_64/usr/local/lib/libCommonAPI-SomeIP.so
+[uid=0 gid=0 perms=0755] usr/local/lib/libCommonAPI-SomeIP.so.3=${QNX_TARGET}/x86_64/usr/local/lib/libCommonAPI-SomeIP.so
+[uid=0 gid=0 perms=0755] usr/local/lib/libCommonAPI-SomeIP.so.3.2.4=${QNX_TARGET}/x86_64/usr/local/lib/libCommonAPI-SomeIP.so
+
+# client binaries
+[uid=1000 gid=1000 perms=0755] home/qnxuser/ota-client=/home/yasmine/Desktop/QNX-OTA/build-qnx/ota-client
+
+# vsomeip config files
+[uid=1000 gid=1000 perms=0755] home/qnxuser/vsomeip-ota-client.json=/home/yasmine/Desktop/QNX-OTA/vsomeip-client.json
+
+# vsomeip runtime dir
+[type=dir uid=0 gid=0 perms=0777] var/vsomeip
+
+# startup script
+[uid=1000 gid=1000 perms=0755] home/qnxuser/run-ota-client.sh=/home/yasmine/qnx-qemu/run-ota-client.sh
