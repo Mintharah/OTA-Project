@@ -12,8 +12,8 @@ An Over-The-Air firmware update system that transfers a root filesystem image fr
 │                              │                                        │                               │
 │  ota-client  (CLI sender)    │  SOME/IP / CommonAPI                  │  ota-flash-service (systemd)  │
 │  ota-client-ui  (Qt6 GUI)    │  startTransfer / sendChunk /          │  FlashManager                 │
-│                              │  finalizeTransfer                      │  (writes rootfs_b, arms       │
-│  vsomeip-ota-client.json     │                                        │   U-Boot, reboots)            │
+│                              │  finalizeTransfer                      │  (writes rootfs_b, changes   │
+│  vsomeip-ota-client.json     │                                        │  boot variable, reboots)      │
 └──────────────────────────────┘                                        └───────────────────────────────┘
 ```
 
