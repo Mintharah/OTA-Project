@@ -3,6 +3,7 @@
 An Over-The-Air firmware update system that transfers a root filesystem image from a **QNX QEMU client** to a **Raspberry Pi 3 (Yocto)** target over Ethernet, using COVESA CommonAPI / SOME/IP as the IPC layer.
 
 ---
+<img width="1920" height="913" alt="image" src="https://github.com/user-attachments/assets/a8ac15e6-8acf-4b2c-9a10-dfb162f5dabf" />
 
 ## Architecture Overview
 
