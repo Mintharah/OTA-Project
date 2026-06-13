@@ -1,6 +1,6 @@
 # OTA Project
 
-An Over-The-Air firmware update system that transfers a root filesystem image from a **QNX QEMU client** to a **Raspberry Pi 3 (Yocto)** target over Ethernet, using COVESA CommonAPI / SOME/IP as the IPC layer.
+An Over-The-Air firmware update system that transfers a root filesystem image from a **QNX QEMU client** to a **Raspberry Pi 3 (Yocto)** target over Ethernet, using COVESA CommonAPI / SOME/IP.
 
 ---
 <img width="1920" height="913" alt="image" src="https://github.com/user-attachments/assets/a8ac15e6-8acf-4b2c-9a10-dfb162f5dabf" />
@@ -82,9 +82,9 @@ SOME/IP service discovery uses multicast `192.168.1.255:30490/udp`. The reliable
 ## Prerequisites
 
 **QNX side (build host):**
-- QNX SDP 8.0 (`~/qnx-qemu/qnx800/`)
+- QNX SDP 8.0
 - CMake ≥ 3.10
-- Cross-toolchain file at `~/kms/toolchain-qnx-x86_64.cmake`
+- Cross-toolchain file
 - vsomeip3, CommonAPI-Core 3.2.4, and CommonAPI-SomeIP 3.2.4 pre-built for QNX x86-64 and installed into the QNX sysroot
 
 **Yocto side (build host):**
