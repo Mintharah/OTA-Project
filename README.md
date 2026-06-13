@@ -10,12 +10,13 @@ An Over-The-Air firmware update system that transfers a root filesystem image fr
 ```
 ┌──────────────────────────────┐         Ethernet (192.168.1.x)        ┌───────────────────────────────┐
 │  QNX (QEMU x86-64)           │ ────────────────────────────────────► │  Raspberry Pi 3 (Yocto)       │
-│                              │                                        │                               │
+│                              │                                       │                               │
 │  ota-client  (CLI sender)    │  SOME/IP / CommonAPI                  │  ota-flash-service (systemd)  │
-│  ota-client-ui  (Qt6 GUI)    │  startTransfer / sendChunk /          │  FlashManager                 │
-│                              │  finalizeTransfer                      │  (writes rootfs_b, changes   │
-│  vsomeip-ota-client.json     │                                        │  boot variable, reboots)      │
-└──────────────────────────────┘                                        └───────────────────────────────┘
+│  vsomeip-ota-client.json     │                                       │  ota-client-ui  (Qt6 GUI)     │                     
+│                              │  startTransfer / sendChunk /          │  FlashManager                 │
+│                              │  finalizeTransfer                     │  (writes rootfs_b, changes    │
+│                              │                                       │  boot variable, reboots)      │
+└──────────────────────────────┘                                       └───────────────────────────────┘
 ```
 
 The service interface is defined in `OTAFlash.fidl` and auto-generated into CommonAPI C++ stubs/proxies under `src-gen/v1/com/ota/`.
