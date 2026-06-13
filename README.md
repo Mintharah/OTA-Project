@@ -64,7 +64,7 @@ OTA-Project/
 │           ├── files/images/       # Animated GIFs: sleep / loading / success / error states
 │           └── ota-client-ui.bb
 │
-└── copy-image-to-qnx.sh            # SCP helper: copies .ext3 image from Yocto deploy to QNX
+└── copy-image-to-qnx.sh            # SCP helper: copies .ext3 image from host to QNX
 ```
 
 ---
